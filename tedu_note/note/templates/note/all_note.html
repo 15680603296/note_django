@@ -1,0 +1,44 @@
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <meta charset="UTF-8">
+    <title>查看所有笔记</title>
+</head>
+<body>
+<p>
+    {{ request.session.username }} 的笔记 <a href="">添加新笔记</a> <a href="">返回首页</a>
+</p>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>标题</th>
+        <th>内容</th>
+        <th>创建时间</th>
+        <th>修改时间</th>
+        <th>修改</th>
+        <th>删除</th>
+    </tr>
+    {% for note in all_note %}
+    <tr>
+        <td>{{ note.id }}</td>
+        <td>{{ note.title }}</td>
+        <td>{{ note.content }}</td>
+        <td>{{ note.created_time }}</td>
+        <td>{{ note.updated_time }}</td>
+        <td>
+            <a href="/note/update_note/{{ note.id }}">修改</a>
+        </td>
+        <td>
+            <a href="/note/delete_note?note_id={{ note.id }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+
